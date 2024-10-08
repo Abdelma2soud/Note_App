@@ -25,7 +25,9 @@ class BottomSheetBody extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            AddButton(),
+            AddButton(
+              txt: 'Add',
+            ),
             SizedBox(
               height: 30,
             )

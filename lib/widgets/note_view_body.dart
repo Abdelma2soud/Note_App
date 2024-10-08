@@ -17,7 +17,10 @@ class NotesViewBody extends StatelessWidget {
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            CustomAppBar(),
+            CustomAppBar(
+              text: 'Notes',
+              icon: Icons.search,
+            ),
             NoteListView(),
           ],
         ),
