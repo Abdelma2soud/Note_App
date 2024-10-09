@@ -22,11 +22,11 @@ class CustomTextField extends StatelessWidget {
         contentPadding: const EdgeInsets.only(left: 16, top: 20, bottom: 20),
         hintText: text,
         hintStyle: const TextStyle(
-          color: PRimarycolor,
+          color: kPrimaryColor,
         ),
         enabledBorder: textFieldBorder(),
         focusedBorder: textFieldBorder(
-          PRimarycolor,
+          kPrimaryColor,
         ),
       ),
     );

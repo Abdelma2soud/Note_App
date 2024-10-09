@@ -10,7 +10,7 @@ class AddButton extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          color: PRimarycolor, borderRadius: BorderRadius.circular(16)),
+          color: kPrimaryColor, borderRadius: BorderRadius.circular(16)),
       child: TextButton(
           onPressed: onPressed,
           child: Text(txt,
