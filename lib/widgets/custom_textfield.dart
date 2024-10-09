@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:note_app/constants/constants.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, required this.text, this.mxlines = 1});
+  const CustomTextField(
+      {super.key, required this.text, this.mxlines = 1, this.controller});
   final String text;
   final int mxlines;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: controller,
       maxLines: mxlines,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "This field can't be empty";
+        }
+        return null;
+      },
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.only(left: 16, top: 20, bottom: 20),
         hintText: text,

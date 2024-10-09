@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:note_app/constants/constants.dart';
 
 class AddButton extends StatelessWidget {
-  const AddButton({super.key, required this.txt});
+  const AddButton({super.key, required this.txt, required this.onPressed});
   final String txt;
+  final void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +12,7 @@ class AddButton extends StatelessWidget {
       decoration: BoxDecoration(
           color: PRimarycolor, borderRadius: BorderRadius.circular(16)),
       child: TextButton(
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text(txt,
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
