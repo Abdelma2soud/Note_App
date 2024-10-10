@@ -4,9 +4,9 @@ import 'package:note_app/constants/constants.dart';
 import 'package:note_app/cubit/add_note_cubit/add_note_states.dart';
 import 'package:note_app/models/note_model.dart';
 
-class AddCubit extends Cubit<AddNoteStates> {
-  AddCubit(super.initialState);
-  // AddCubit() : super(InitialAddNoteState());   الاتنين واحد *
+class AddNoteCubit extends Cubit<AddNoteStates> {
+  // AddNoterCubit(super.initialState);
+  AddNoteCubit() : super(InitialAddNoteState());
   addNote(NoteModel note) async {
     emit(LoadingState());
     try {
