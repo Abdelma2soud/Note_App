@@ -14,7 +14,7 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
 
   TextEditingController contentcontroller = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -22,6 +22,7 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
           key: formKey,
+          autovalidateMode: autovalidateMode,
           child: Column(
             children: [
               const SizedBox(
@@ -30,19 +31,30 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
               CustomTextField(
                 controller: titlecontroller,
                 text: 'Tittle',
+                onsaved: (value) {
+                  titlecontroller.text = value!;
+                },
               ),
               const SizedBox(
                 height: 16,
               ),
               CustomTextField(
-                  controller: contentcontroller, text: 'Content', mxlines: 5),
+                controller: contentcontroller,
+                text: 'Content',
+                mxlines: 5,
+                onsaved: (value) {
+                  contentcontroller.text = value!;
+                },
+              ),
               const SizedBox(
                 height: 50,
               ),
               AddButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    print('This field is required');
+                    formKey.currentState!.save();
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
                   }
                 },
                 txt: 'Add',
