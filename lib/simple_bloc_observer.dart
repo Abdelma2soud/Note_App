@@ -10,17 +10,27 @@ class SimpleBlocObserver implements BlocObserver {
   }
 
   @override
-  void onClose(BlocBase bloc) {}
+  void onClose(BlocBase bloc) {
+    // TODO: implement onClose
+  }
 
   @override
-  void onCreate(BlocBase bloc) {}
+  void onCreate(BlocBase bloc) {
+    // TODO: implement onCreate
+  }
 
   @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {}
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    // TODO: implement onError
+  }
 
   @override
-  void onEvent(Bloc bloc, Object? event) {}
+  void onEvent(Bloc bloc, Object? event) {
+    // TODO: implement onEvent
+  }
 
   @override
-  void onTransition(Bloc bloc, Transition transition) {}
+  void onTransition(Bloc bloc, Transition transition) {
+    // TODO: implement onTransition
+  }
 }
