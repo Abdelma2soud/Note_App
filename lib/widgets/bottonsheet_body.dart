@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_app/cubit/add_note_cubit/add_cubit.dart';
 import 'package:note_app/cubit/add_note_cubit/add_note_states.dart';
+import 'package:note_app/models/note_model.dart';
 import 'package:note_app/widgets/add_button.dart';
 import 'package:note_app/widgets/custom_textfield.dart';
 
@@ -28,19 +30,23 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
           padding: EdgeInsets.only(
             left: 16.0,
             right: 16.0,
-            bottom: MediaQuery.of(context).systemGestureInsets.bottom,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: BlocConsumer<AddNoteCubit, AddNoteStates>(
             listener: (context, state) {
               if (state is FailureAddingNoteState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('failed to adding notes')));
-                print('failed to adding notes');
+                if (kDebugMode) {
+                  print('failed to adding notes');
+                }
               }
               if (state is SuccessAddingNoteState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Adding Notes Successfully')));
-                print('Adding Notes Successfully');
+                if (kDebugMode) {
+                  print('Adding Notes Successfully');
+                }
                 Navigator.pop(context);
               }
             },
@@ -80,6 +86,13 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
+                            NoteModel note = NoteModel(
+                                title: titlecontroller.text,
+                                subtitle: contentcontroller.text,
+                                date: DateTime.now().toString(),
+                                color: Colors.amberAccent.value);
+                            BlocProvider.of<AddNoteCubit>(context)
+                                .addNote(note);
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                           }
