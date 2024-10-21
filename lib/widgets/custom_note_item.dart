@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/edit_note_view.dart';
 
 class CustomNoteItem extends StatelessWidget {
-  const CustomNoteItem({super.key, required this.color});
-  final MaterialColor color;
+  const CustomNoteItem({super.key, required this.note});
+  // final MaterialColor color;
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +19,7 @@ class CustomNoteItem extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: color,
+            color: Colors.amber,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Padding(
@@ -26,13 +28,13 @@ class CustomNoteItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 ListTile(
-                  title: const Text(
-                    'Flutter Tips',
-                    style: TextStyle(color: Colors.black, fontSize: 26),
+                  title: Text(
+                    note.title,
+                    style: const TextStyle(color: Colors.black, fontSize: 26),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 24, bottom: 16),
-                    child: Text('Build Your Career With Tharwat Samy',
+                    child: Text(note.subtitle,
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.5),
                             fontSize: 18)),
@@ -48,7 +50,7 @@ class CustomNoteItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 30),
-                  child: Text('Oct 7,2024',
+                  child: Text(note.date,
                       style: TextStyle(
                           color: Colors.black.withOpacity(0.5), fontSize: 16)),
                 ),
