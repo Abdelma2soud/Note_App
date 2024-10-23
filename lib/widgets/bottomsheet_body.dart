@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:intl/intl.dart';
 import 'package:note_app/cubit/add_note_cubit/add_cubit.dart';
 import 'package:note_app/cubit/add_note_cubit/add_note_states.dart';
+import 'package:note_app/cubit/notes_cubit/cubit/notes_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/widgets/add_button.dart';
 import 'package:note_app/widgets/custom_textfield.dart';
@@ -43,10 +44,11 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
               }
               if (state is SuccessAddingNoteState) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Adding Notes Successfully')));
+                    const SnackBar(content: Text('Adding Note Successfully')));
                 if (kDebugMode) {
-                  print('Adding Notes Successfully');
+                  print('Adding Note Successfully');
                 }
+                BlocProvider.of<NotesCubit>(context).fetchData();
                 Navigator.pop(context);
               }
             },
@@ -89,10 +91,13 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                             NoteModel note = NoteModel(
                                 title: titlecontroller.text,
                                 subtitle: contentcontroller.text,
-                                date: DateTime.now().toString(),
+                                date: DateFormat('dd/mm/yyyy').format(
+                                  DateTime.now(),
+                                ),
                                 color: Colors.amberAccent.value);
                             BlocProvider.of<AddNoteCubit>(context)
                                 .addNote(note);
+                            BlocProvider.of<NotesCubit>(context).fetchData();
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                           }

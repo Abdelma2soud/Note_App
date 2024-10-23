@@ -10,7 +10,7 @@ class NoteListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<NoteModel> note = BlocProvider.of<NotesCubit>(context).noteModel!;
+    List<NoteModel> note = BlocProvider.of<NotesCubit>(context).noteModel ?? [];
     return BlocBuilder<NotesCubit, NotesStates>(
       builder: (context, state) {
         return Expanded(
@@ -18,7 +18,7 @@ class NoteListView extends StatelessWidget {
             itemBuilder: (context, index) => CustomNoteItem(
               note: note[index],
             ),
-            itemCount: state is SuccessNoteState ? note.length : 0,
+            itemCount: note.length,
           ),
         );
       },

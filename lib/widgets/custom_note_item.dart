@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:note_app/cubit/notes_cubit/cubit/notes_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/views/edit_note_view.dart';
 
@@ -13,13 +15,12 @@ class CustomNoteItem extends StatelessWidget {
       padding: const EdgeInsets.only(top: 16.0),
       child: GestureDetector(
         onTap: () {
-          print('**************************************');
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const EditNoteView()));
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.amber,
+            color: Color(note.color),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Padding(
@@ -40,8 +41,13 @@ class CustomNoteItem extends StatelessWidget {
                             fontSize: 18)),
                   ),
                   trailing: IconButton(
-                      focusColor: Colors.red,
-                      onPressed: () {},
+                      onPressed: () {
+                        note.delete();
+                        BlocProvider.of<NotesCubit>(context).fetchData();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Note is deleted')));
+                        print('note deleted successfully');
+                      },
                       icon: const FaIcon(
                         FontAwesomeIcons.trash,
                         color: Colors.black,

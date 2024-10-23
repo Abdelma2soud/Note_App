@@ -14,7 +14,6 @@ class NotesViewBody extends StatefulWidget {
 }
 
 class _NotesViewBodyState extends State<NotesViewBody> {
-// don't forget to add list of color to change the note item color by passing the index of listview to the list
   @override
   void initState() {
     BlocProvider.of<NotesCubit>(context).fetchData();
