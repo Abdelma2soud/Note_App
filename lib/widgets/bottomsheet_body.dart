@@ -7,6 +7,7 @@ import 'package:note_app/cubit/add_note_cubit/add_note_states.dart';
 import 'package:note_app/cubit/notes_cubit/cubit/notes_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/widgets/add_button.dart';
+import 'package:note_app/widgets/custom_color_list_view.dart';
 import 'package:note_app/widgets/custom_textfield.dart';
 
 class BottomSheetBody extends StatefulWidget {
@@ -82,7 +83,11 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                         },
                       ),
                       const SizedBox(
-                        height: 50,
+                        height: 16,
+                      ),
+                      const ColorListView(),
+                      const SizedBox(
+                        height: 16,
                       ),
                       AddButton(
                         onPressed: () {
