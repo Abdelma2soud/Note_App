@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_app/cubit/notes_cubit/cubit/notes_cubit.dart';
 import 'package:note_app/models/note_model.dart';
 import 'package:note_app/widgets/custom_appbar.dart';
 import 'package:note_app/widgets/custom_textfield.dart';
+import 'package:note_app/widgets/edit_note_color_list_view.dart';
 
 class EditNoteViewBody extends StatefulWidget {
   const EditNoteViewBody({super.key, required this.note});
@@ -36,7 +38,9 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('edit note successfully')));
-                  print('edit note successfully');
+                  if (kDebugMode) {
+                    print('edit note successfully');
+                  }
                 },
               ),
               const SizedBox(
@@ -46,17 +50,26 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
                 onchanged: (value) {
                   title = value;
                 },
-                text: 'Tittle',
+                text: widget.note.title,
               ),
               const SizedBox(
                 height: 16,
               ),
               CustomTextField(
-                text: 'Content',
+                text: widget.note.subtitle,
                 mxlines: 5,
                 onchanged: (value) {
                   subtitle = value;
                 },
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              EditColorListView(
+                noteModel: widget.note,
+              ),
+              const SizedBox(
+                height: 16,
               ),
             ],
           ),
