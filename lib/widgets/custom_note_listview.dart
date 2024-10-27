@@ -14,7 +14,6 @@ class NoteListView extends StatelessWidget {
       builder: (context, state) {
         List<NoteModel> notes =
             BlocProvider.of<NotesCubit>(context).noteModel ?? [];
-
         return Expanded(
           child: ListView.builder(
             itemCount: notes.length,
@@ -24,7 +23,7 @@ class NoteListView extends StatelessWidget {
               return Dismissible(
                 key: Key(note.title), // Unique key for each note
                 direction:
-                    DismissDirection.endToStart, // Allow only swipe to delete
+                    DismissDirection.startToEnd, // Allow only swipe to delete
                 onDismissed: (direction) {
                   // Remove the note from the list
                   note.delete();
@@ -40,10 +39,10 @@ class NoteListView extends StatelessWidget {
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: const Padding(
-                      padding: EdgeInsets.only(right: 32.0),
+                      padding: EdgeInsets.only(left: 32.0),
                       child: FaIcon(
                         FontAwesomeIcons.trash,
                         color: Colors.white,
